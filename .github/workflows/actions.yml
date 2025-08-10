@@ -8,10 +8,23 @@ jobs:
       max-parallel: 2
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node_version: [14.x, 15.x, 16.x]
+        node_version: [16.x, 18.x, 20.x]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/setup-node@v3.6.0
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3.6.0
         with:
           node-version: ${{ matrix.node_version }}
-          cache: "npm"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run build
+        run: npm run build
+
+      - name: Run tests
+        run: npm test
