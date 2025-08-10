@@ -1,0 +1,11 @@
+on:
+  workflow_dispatch:
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          deprecated = true
+            if [ "$deprecated" = true ]; then
+                echo "::warning::This feature is deprecated"
+            fi
