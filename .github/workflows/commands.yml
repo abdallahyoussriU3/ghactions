@@ -4,7 +4,10 @@ jobs:
   example:
     runs-on: ubuntu-latest
     steps:
-      - name: Set API key
-        run: echo "API_KEY=12345" >> $GITHUB_ENV
-      - name: Use API key
-        run: echo "Using API key ${{ env.API_KEY }}"
+      - name: Check if a file exists
+        run: |
+          if [ -f "cocnfig.yaml"]; then
+            echo "File exists"
+          else
+            echo "::error::config.yaml does not exist"
+          fi
